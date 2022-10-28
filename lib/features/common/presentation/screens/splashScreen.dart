@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trm/features/dashboard/presentation/screens/dashboardScreen.dart';
+import 'package:trm/config/appColors.dart';
+
+import '../../application/splashController.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/';
@@ -10,17 +12,19 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with SplashController {
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pushNamed(context, DashboardScreen.routeName);
-    });
+    navigate(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      // backgroundColor: AppColors.white,
+      body: Center(child: Image.asset('assets/logo/logo.png', width: 50, height: 50)),
+    );
   }
 }
