@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trm/features/dashboard/domain/entities/movieEntity.dart';
 
 import '../../../config/appColors.dart';
 import 'itemImageTile.dart';
@@ -6,11 +7,14 @@ import 'itemInfoTile.dart';
 
 class ListItemWidget extends StatelessWidget {
   final bool isPortrait;
+  final Movie? movie;
+  final int index;
 
-  const ListItemWidget({super.key, required this.isPortrait});
+  const ListItemWidget({super.key, required this.isPortrait, this.movie, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    if (movie == null) return const SizedBox();
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Container(
@@ -25,9 +29,9 @@ class ListItemWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ItemImageWidget(),
+            ItemImageWidget(movie: movie!),
             const SizedBox(width: 8),
-            ItemInfoWidget(isPortrait: isPortrait),
+            ItemInfoWidget(isPortrait: isPortrait, movie: movie!,index: index),
           ],
         ),
       ),

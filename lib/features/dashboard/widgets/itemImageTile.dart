@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../config/appColors.dart';
 import '../../common/widgets/appText.dart';
+import '../domain/entities/movieEntity.dart';
 
 class ItemImageWidget extends StatelessWidget {
-  const ItemImageWidget({super.key});
+  final Movie movie;
+
+  const ItemImageWidget({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +18,14 @@ class ItemImageWidget extends StatelessWidget {
           width: 130,
           height: 160,
           decoration: BoxDecoration(
-            image: const DecorationImage(
-              image: NetworkImage('https://www.themoviedb.org/t/p/w220_and_h330_face/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg'),
+            image: DecorationImage(
+              image: NetworkImage('https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
         ),
+        if(movie.popularity != null)
         Positioned.fill(
           bottom: -20,
           child: Align(
@@ -31,15 +35,15 @@ class ItemImageWidget extends StatelessWidget {
                 color: AppColors.primaryColor,
                 shape: BoxShape.circle,
               ),
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(4),
               child: Stack(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 40,
                     width: 40,
                     child: CircularProgressIndicator(
                       strokeWidth: 4,
-                      value: .85,
+                      value: movie.popularity! / 100,
                       backgroundColor: AppColors.grey,
                       color: AppColors.green,
                     ),
@@ -48,7 +52,7 @@ class ItemImageWidget extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.center,
                       child: AppText(
-                        text: '68%',
+                        text: '${movie.popularity!.toInt()}%',
                         color: AppColors.white,
                         fontSize: 11,
                       ),
