@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../config/appColors.dart';
 import '../../common/widgets/appText.dart';
 
-class ItemInfoWidget extends StatelessWidget{
-  const ItemInfoWidget({super.key});
+class ItemInfoWidget extends StatelessWidget {
+  final bool isPortrait;
+
+  const ItemInfoWidget({super.key, required this.isPortrait});
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +32,14 @@ class ItemInfoWidget extends StatelessWidget{
           ),
           const SizedBox(height: 8),
           AppText(
-            text: 'Framed in the 1040s for the ' * 10,
+            text: 'Framed in the 1040s for the ' * 50,
             fontSize: 11.5,
             color: AppColors.silver,
-            maxLine: 5,
+            maxLine: isPortrait ? 5 : 6,
             textOverflow: TextOverflow.ellipsis,
           ),
         ],
       ),
     );
   }
-
 }

@@ -6,4 +6,7 @@ class AppLayout {
 
   /// Device text scale Factor set to 1.0
   static MediaQueryData appScaleFactor(BuildContext context) => MediaQuery.of(context).copyWith(textScaleFactor: 1.0);
+
+  /// Detect Portrait Mode
+  static bool isPortrait(BuildContext context) => MediaQuery.of(context).orientation == Orientation.portrait;
 }

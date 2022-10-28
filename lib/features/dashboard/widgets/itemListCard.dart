@@ -4,8 +4,10 @@ import '../../../config/appColors.dart';
 import 'itemImageTile.dart';
 import 'itemInfoTile.dart';
 
-class ListItemWidget extends StatelessWidget{
-  const ListItemWidget({super.key});
+class ListItemWidget extends StatelessWidget {
+  final bool isPortrait;
+
+  const ListItemWidget({super.key, required this.isPortrait});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +24,13 @@ class ListItemWidget extends StatelessWidget{
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            ItemImageWidget(),
-            SizedBox(width: 8),
-            ItemInfoWidget(),
+          children: [
+            const ItemImageWidget(),
+            const SizedBox(width: 8),
+            ItemInfoWidget(isPortrait: isPortrait),
           ],
         ),
       ),
     );
   }
-
 }

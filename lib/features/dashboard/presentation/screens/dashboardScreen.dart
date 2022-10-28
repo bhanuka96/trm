@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trm/config/appColors.dart';
+import 'package:trm/config/appLayout.dart';
 
 import '../../widgets/itemListCard.dart';
 
@@ -10,6 +11,8 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isPortrait = AppLayout.isPortrait(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
@@ -20,7 +23,7 @@ class DashboardScreen extends StatelessWidget {
         // itemCount: 10,
         padding: const EdgeInsets.all(12),
         itemBuilder: (_, int index) {
-          return const ListItemWidget();
+          return ListItemWidget(isPortrait: isPortrait);
         },
       ),
     );
