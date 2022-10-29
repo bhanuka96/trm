@@ -38,4 +38,12 @@ class Movie with _$Movie {
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+
+  @override
+  bool operator ==(Object other) {
+    return other is Movie && hashCode == other.hashCode;
+  }
+
+  @override
+  int get hashCode => id!;
 }

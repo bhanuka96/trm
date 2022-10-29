@@ -75,7 +75,7 @@ class ItemImageWidget extends StatelessWidget {
                       width: 40,
                       child: CircularProgressIndicator(
                         strokeWidth: 4,
-                        value: movie.popularity! / 100,
+                        value: movie.vote_average! / 10,
                         backgroundColor: AppColors.grey,
                         color: AppColors.green,
                       ),
@@ -84,7 +84,7 @@ class ItemImageWidget extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.center,
                         child: AppText(
-                          text: '${movie.popularity!.toInt()}%',
+                          text: '${(movie.vote_average! * 10).toInt()}%',
                           color: AppColors.white,
                           fontSize: 11,
                         ),
