@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:trm/core/networking/dioExceptions.dart';
 import 'package:trm/features/common/application/connectionController.dart';
 import 'package:trm/features/common/providers.dart';
 import 'package:trm/main.dart';
@@ -12,7 +13,11 @@ import '../domain/entities/paginationState.dart';
 import '../infrastructure/repositories/movieRepository.dart';
 
 class MovieController {
-  MovieController();
+  final MovieRepository _movieRepository;
+
+  MovieController({required MovieRepository movieRepository})
+      : _movieRepository = movieRepository,
+        super();
 
   final onNewsListController = BehaviorSubject<PaginationState>.seeded(const PaginationState());
 
@@ -52,7 +57,7 @@ class MovieController {
   }
 
   Future<MovieEntity?> _get(int pageKey) {
-    return MovieRepository().getMovies(pageKey);
+    return _movieRepository.fetchMovies(pageKey);
   }
 
   Stream<PaginationState> _fetchList(int pageKey) async* {
@@ -67,7 +72,7 @@ class MovieController {
         results = cacheMovies;
         debugPrint('isStillCache : PageKey=$pageKey, IsLast=$isLastPage , TotalPage=$totalPages , ResultLength=${results.length}');
       } else if (ref.read(connectionDetectOneTimeProvider).value == NetworkStatus.off) {
-        print('Connection : ${ref.read(connectionDetectOneTimeProvider).value}');
+        debugPrint('Connection : ${ref.read(connectionDetectOneTimeProvider).value}');
         throw ('No Internet Connection');
       } else {
         final response = await _get(pageKey);
@@ -88,7 +93,9 @@ class MovieController {
         itemList: data,
       );
     } catch (e) {
-      print('Error is : $e');
+      if(e is DioExceptions){
+        debugPrint('Error is : ${e.name} , ${e.message} , ${e.statusCode} , ${e.code} , ${e.exceptionType}');
+      }
       yield PaginationState(
         error: e,
         nextPageKey: lastState.nextPageKey,

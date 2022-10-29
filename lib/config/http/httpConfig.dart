@@ -6,5 +6,5 @@ class HttpConfig {
 
   static const baseUrl = String.fromEnvironment('BASE_URL');
 
-  static const apiKet = String.fromEnvironment('TRM_KEY');
+  static const apiKey = String.fromEnvironment('TRM_KEY');
 }

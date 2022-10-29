@@ -4,7 +4,7 @@ abstract class ApiInterface {
   const ApiInterface();
 
 
-  Future<List<T>> getAllData<T>({
+  Future<T> getAllData<T>({
     required String endpoint,
     required Map<String,dynamic> queryParams,
     CancelToken? cancelToken,

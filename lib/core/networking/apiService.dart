@@ -10,17 +10,17 @@ class ApiService implements ApiInterface {
   ApiService(DioService dioService) : _dioService = dioService;
 
   @override
-  Future<List<T>> getAllData<T>({
+  Future<T> getAllData<T>({
     required String endpoint,
     required Map<String, dynamic> queryParams,
     CancelToken? cancelToken,
     required T Function(Map<String, dynamic> responseBody) converter,
   }) async {
-    List<Object?> body;
+    Object? body;
 
     try {
       // Entire map of response
-      final data = await _dioService.get<List<Object?>>(
+      final data = await _dioService.get<Object?>(
         endpoint: endpoint,
         queryParams: queryParams,
         cancelToken: cancelToken,
@@ -34,7 +34,7 @@ class ApiService implements ApiInterface {
 
     try {
       // Returning the deserialized objects
-      return body.map((dataMap) => converter(dataMap! as Map<String, dynamic>)).toList();
+      return converter(body as Map<String, dynamic>);
     } on Exception catch (ex) {
       throw DioExceptions.fromParsingException(ex);
     }

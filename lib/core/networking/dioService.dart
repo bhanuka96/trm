@@ -26,10 +26,10 @@ class DioService {
     final response = await _dio.get<Map<String,dynamic>>(
       endpoint,
       queryParameters: queryParams,
-      // options: _mergeDioAndCacheOptions(dioOptions: options),
       cancelToken: cancelToken ?? _cancelToken,
     );
-    return ResponseModel<R>.fromJson(response.data!);
+    var data = ResponseModel<R>.fromJson(response.data!);
+    return data;
   }
 
   void cancelRequests({CancelToken? cancelToken}) {
