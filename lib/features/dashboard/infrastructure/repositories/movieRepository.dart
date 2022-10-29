@@ -9,7 +9,7 @@ class MovieRepository implements MovieRepositoryInterface {
   Future<MovieEntity?> getMovies(int page) async {
     try {
       const String key = String.fromEnvironment('TRM_KEY');
-      debugPrint('key is : $key , page:$page');
+      debugPrint('API : page --> $page');
       final Response res = await Dio().get('https://api.themoviedb.org/3/movie/top_rated', queryParameters: {
         'language': 'en-US',
         'page': page,
@@ -19,7 +19,8 @@ class MovieRepository implements MovieRepositoryInterface {
       return MovieEntity.fromJson(res.data);
     } catch (e) {
       debugPrint('Error is : $e');
-      return null;
+      rethrow;
+      // return null;
     }
   }
 }

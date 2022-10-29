@@ -6,7 +6,9 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:trm/config/appColors.dart';
 import 'package:trm/config/appLayout.dart';
 import 'package:trm/features/dashboard/domain/entities/movieEntity.dart';
+import 'package:trm/features/dashboard/widgets/errorIndicator.dart';
 
+import '../../../common/widgets/appError.dart';
 import '../../providers.dart';
 import '../../widgets/itemListCard.dart';
 
@@ -23,16 +25,26 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   final PagingController<int, Movie?> _pagingController = PagingController(firstPageKey: 1);
 
   late StreamSubscription _subscription;
+  late StreamSubscription _subscriptionOld;
 
   @override
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
-      ref.read(repositoryProvider).add(pageKey);
-      debugPrint("the page is $pageKey");
+      ref.read(repositoryProvider).init(ref, pageKey);
     });
 
-    _subscription = ref.read(repositoryProvider).getStream().listen((state) {
-      print('listen : ${state.itemList?.length}');
+    // _subscription = objectBox.getMoviesStream().listen((event) {
+    //   debugPrint('listen cache : ${event.length} , $page');
+    //   _pagingController.value = PagingState(
+    //     error: null,
+    //     nextPageKey: page,
+    //     itemList: event,
+    //   );
+    // });
+
+    _subscriptionOld = ref.read(repositoryProvider).getStream().listen((state) {
+      debugPrint('listen api : ${state.itemList?.length} , ${state.nextPageKey}');
+      // if ((state.itemList?.length ?? 0) == 0) return;
       _pagingController.value = PagingState(
         error: state.error,
         nextPageKey: state.nextPageKey,
@@ -46,36 +58,50 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final bool isPortrait = AppLayout.isPortrait(context);
-
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.primaryColor,
-          centerTitle: true,
-          title: Image.asset('assets/logo/logo.png', width: 50, height: 50),
-        ),
-        body: PagedListView<int, Movie?>(
-          pagingController: _pagingController,
-          padding: const EdgeInsets.all(12),
-          builderDelegate: PagedChildBuilderDelegate<Movie?>(
-            itemBuilder: (_, movie, index) {
-              return ListItemWidget(isPortrait: isPortrait, movie: movie, index: index);
-            },
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        centerTitle: true,
+        title: Image.asset('assets/logo/logo.png', width: 50, height: 50),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                _pagingController.refresh();
+              },
+              child: PagedListView<int, Movie?>(
+                pagingController: _pagingController,
+                padding: const EdgeInsets.all(12),
+                builderDelegate: PagedChildBuilderDelegate<Movie?>(itemBuilder: (_, movie, index) {
+                  return ListItemWidget(isPortrait: isPortrait, movie: movie, index: index);
+                }, noItemsFoundIndicatorBuilder: (_) {
+                  return const ErrorIndicator();
+                }, firstPageErrorIndicatorBuilder: (_) {
+                  return const ErrorIndicator();
+                }
+                    // firstPageProgressIndicatorBuilder: ,
+                    // animateTransitions: ,
+                    // newPageErrorIndicatorBuilder: ,
+                    // newPageProgressIndicatorBuilder: ,
+                    // noItemsFoundIndicatorBuilder: ,
+                    // noMoreItemsIndicatorBuilder: ,
+                    // transitionDuration: ,
+                    ),
+              ),
+            ),
           ),
-        )
-
-        // ListView.builder(
-        //   // itemCount: 10,
-        //   padding: const EdgeInsets.all(12),
-        //   itemBuilder: (_, int index) {
-        //     return ListItemWidget(isPortrait: isPortrait);
-        //   },
-        // ),
-        );
+          const AppError(),
+        ],
+      ),
+    );
   }
 
   @override
   void dispose() {
     _subscription.cancel();
+    _subscriptionOld.cancel();
     _pagingController.dispose();
     ref.read(repositoryProvider).dispose();
     super.dispose();

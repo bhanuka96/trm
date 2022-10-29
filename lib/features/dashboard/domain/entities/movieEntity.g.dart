@@ -28,8 +28,6 @@ Map<String, dynamic> _$$_MovieEntityToJson(_$_MovieEntity instance) =>
 _$_Movie _$$_MovieFromJson(Map<String, dynamic> json) => _$_Movie(
       adult: json['adult'] as bool?,
       backdrop_path: json['backdrop_path'] as String?,
-      genre_ids:
-          (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int?).toList(),
       id: json['id'] as int?,
       original_language: json['original_language'] as String?,
       original_title: json['original_title'] as String?,
@@ -46,7 +44,6 @@ _$_Movie _$$_MovieFromJson(Map<String, dynamic> json) => _$_Movie(
 Map<String, dynamic> _$$_MovieToJson(_$_Movie instance) => <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdrop_path,
-      'genre_ids': instance.genre_ids,
       'id': instance.id,
       'original_language': instance.original_language,
       'original_title': instance.original_title,

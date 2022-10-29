@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:objectbox/objectbox.dart';
+
 part 'movieEntity.freezed.dart';
 
 part 'movieEntity.g.dart';
@@ -7,7 +9,7 @@ part 'movieEntity.g.dart';
 @freezed
 class MovieEntity with _$MovieEntity {
   const factory MovieEntity({
-    int? page,
+   int? page,
     List<Movie?>? results,
     int? total_pages,
     int? total_results,
@@ -18,11 +20,11 @@ class MovieEntity with _$MovieEntity {
 
 @freezed
 class Movie with _$Movie {
+  @Entity(realClass: Movie)
   const factory Movie({
     bool? adult,
     String? backdrop_path,
-    List<int?>? genre_ids,
-    int? id,
+    @Id(assignable: true) int? id,
     String? original_language,
     String? original_title,
     String? overview,
