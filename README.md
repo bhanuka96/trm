@@ -1,6 +1,10 @@
 
 # Technical Test - Bhanuka Isuru
 
+**APK File**
+[Google Drive](https://drive.google.com/file/d/1oagYovOxLs1GoUJwAlq_xR6-emIn5Ihy/view?usp=sharing)
+
+
 **How do I store API Keys and Base Url?**
 
 - I chose  `--dart -define` to store API Key and Base Url. *Reason:* The main advantage of using `--dart-define` is that no need to hardcoding sensitive keys in the source code. And another benefit it the keys can be accessing on the native Android and IOS side.
