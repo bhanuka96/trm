@@ -3,7 +3,7 @@
 
 **How do I store API Keys and Base Url?**
 
-- I choosed  `--dart -define` to store API Key and Base Url. *Reason:* The main advantange of using `--dart-define` is that no need to hardcoding sensitive keys in the source code. And another benefit it the keys can be accessing on the native Android and IOS side.
+- I chose  `--dart -define` to store API Key and Base Url. *Reason:* The main advantage of using `--dart-define` is that no need to hardcoding sensitive keys in the source code. And another benefit it the keys can be accessing on the native Android and IOS side.
 
 
 **how to install and run the code?**
@@ -55,7 +55,7 @@ These are the layers in this pattern.
 
 
 
-**App Directory Strucutre**
+**App Directory Structure**
 
 Called feature-bases. Each feature has its own directory strucutre.
 
