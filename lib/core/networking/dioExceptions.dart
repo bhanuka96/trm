@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 /// An enum that holds names for our custom exceptions.
 enum ExceptionType {
@@ -97,8 +96,7 @@ class DioExceptions implements Exception {
               );
             }
             final name = error.response?.data['headers']['code'] as String;
-            final message =
-            error.response?.data['headers']['message'] as String;
+            final message = error.response?.data['headers']['message'] as String;
             if (name == ExceptionType.tokenExpiredException.name) {
               return DioExceptions(
                 exceptionType: ExceptionType.tokenExpiredException,

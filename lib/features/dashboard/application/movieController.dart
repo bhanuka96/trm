@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:trm/core/networking/dioExceptions.dart';
 import 'package:trm/features/common/application/connectionController.dart';
 import 'package:trm/features/common/providers.dart';
 import 'package:trm/main.dart';
