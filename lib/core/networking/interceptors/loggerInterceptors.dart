@@ -46,7 +46,7 @@ class LoggingInterceptor extends Interceptor {
       debugPrint('\tSource: Network');
     }
 
-    debugPrint('\tResponse: ${response.data}');
+    // debugPrint('\tResponse: ${response.data}');
 
     debugPrint('<-- END HTTP');
 

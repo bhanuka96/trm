@@ -38,7 +38,7 @@ class ItemInfoWidget extends StatelessWidget {
             text: movie.overview ?? '',
             fontSize: 11.5,
             color: AppColors.silver,
-            maxLine: isPortrait ? 5 : 6,
+            maxLine: isPortrait ? 4 : 6,
             textOverflow: TextOverflow.ellipsis,
           ),
         ],
