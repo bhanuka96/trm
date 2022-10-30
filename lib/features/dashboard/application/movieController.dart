@@ -79,7 +79,7 @@ class MovieController {
 
       final nextPageKey = isLastPage ? 0 : pageKey + 1;
 
-      final List<Movie?> data = [...lastState.itemList ?? [], ...results ?? []];
+      final List<Movie?> data = <Movie?>{...lastState.itemList ?? [], ...results ?? []}.toList();
 
       objectBox.setMovies(data);
 
