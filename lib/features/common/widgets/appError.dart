@@ -14,7 +14,6 @@ class AppError extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(connectionDetectProvider);
-    debugPrint('connection: $state');
     if (state == NetworkStatus.off) {
       return Container(
         color: AppColors.black,

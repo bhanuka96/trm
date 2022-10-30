@@ -133,7 +133,6 @@ class DioExceptions implements Exception {
   }
 
   factory DioExceptions.fromParsingException(Exception error) {
-    debugPrint('$error');
     return DioExceptions(
       exceptionType: ExceptionType.serializationException,
       message: 'Failed to parse network response to model or vice versa',

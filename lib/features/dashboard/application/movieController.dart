@@ -91,9 +91,6 @@ class MovieController {
         itemList: data,
       );
     } catch (e) {
-      if(e is DioExceptions){
-        debugPrint('Error is : ${e.name} , ${e.message} , ${e.statusCode} , ${e.code} , ${e.exceptionType}');
-      }
       yield PaginationState(
         error: e,
         nextPageKey: lastState.nextPageKey,

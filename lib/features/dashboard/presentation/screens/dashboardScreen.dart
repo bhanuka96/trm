@@ -33,18 +33,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
      ref.read(repositoryProvider).init(ref, pageKey);
     });
 
-    // _subscription = objectBox.getMoviesStream().listen((event) {
-    //   debugPrint('listen cache : ${event.length} , $page');
-    //   _pagingController.value = PagingState(
-    //     error: null,
-    //     nextPageKey: page,
-    //     itemList: event,
-    //   );
-    // });
-
     _subscriptionOld = ref.read(repositoryProvider).getStream().listen((state) {
-      debugPrint('listen api : ${state.itemList?.length} , ${state.nextPageKey}');
-      // if ((state.itemList?.length ?? 0) == 0) return;
       _pagingController.value = PagingState(
         error: state.error,
         nextPageKey: state.nextPageKey,

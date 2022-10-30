@@ -14,7 +14,6 @@ class MovieRepository implements MovieRepositoryInterface {
   @override
   Future<MovieEntity?> fetchMovies(int page) async {
     try {
-      debugPrint('API : page --> $page');
       final Map<String, dynamic> queryParams = {
         'language': 'en-US',
         'page': page,
