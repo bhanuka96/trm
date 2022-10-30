@@ -22,7 +22,7 @@ class EmptyListIndicator extends StatelessWidget{
             onPressed: () {
               var state = ref.read(connectionDetectProvider);
               if (state == NetworkStatus.off) return;
-              ref.read(repositoryProvider).add(1);
+              ref.read(movieRepositoryProvider).add(1);
             },
             style: OutlinedButton.styleFrom(minimumSize: const Size(100, 30)),
             child: AppText(text: 'Refresh', color: AppColors.primaryColor, fontWeight: FontWeight.w600))

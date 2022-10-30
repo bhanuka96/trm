@@ -1,5 +1,5 @@
+import '../../../../../objectbox.g.dart';
 import '../../../domain/entities/movieEntity.dart';
-import 'objectbox.g.dart';
 
 class ObjectBox {
   late final Store _store;
@@ -21,7 +21,7 @@ class ObjectBox {
   }
 
   List<Movie> getMovies() {
-    return _movieBox.getAll().toSet().toList()..sort((a, b) => (b.vote_average ?? 0).compareTo((a.vote_average ?? 0)));
+    return _movieBox.getAll()..sort((a, b) => (b.vote_average ?? 0).compareTo((a.vote_average ?? 0)));
   }
 
   List<int> setMovies(List<Movie?>? movies) {

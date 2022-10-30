@@ -67,18 +67,25 @@ class LoggingInterceptor extends Interceptor {
     if (err.response != null) {
       debugPrint('\tStatus code: ${err.response!.statusCode}');
       if (err.response!.data != null) {
-        final headers = err.response!.data['headers'] as Map<String, dynamic>;
-        final message = headers['message'] as String;
-        final code = headers['code'] as String;
-        debugPrint('\tException: $code');
-        debugPrint('\tMessage: $message');
-        if (headers.containsKey('data')) {
-          //API Dependant
-          final data = headers['data'] as List<Object?>;
-          if (data.isNotEmpty) {
-            debugPrint('\tData: $data');
-          }
-        }
+        final statusCode = err.response!.data?['status_code'] as int?;
+        final statusMessage = err.response!.data?['status_message'] as String?;
+        final isSuccess = err.response!.data?['success'] as bool?;
+        final errors = err.response!.data?['errors'] as List?;
+
+        // final headers = err.response!.data?['headers'] as Map<String, dynamic>?;
+        // final message = headers?['message'] as String?;
+        // final code = headers?['code'] as String?;
+        debugPrint('\tException: $statusCode');
+        debugPrint('\tMessage: $statusMessage');
+        debugPrint('\tsuccess: $isSuccess');
+        debugPrint('\terrors: $errors');
+        // if (headers?.containsKey('data') == true) {
+        //   //API Dependant
+        //   final data = headers?['data'] as List<Object?>?;
+        //   if (data?.isNotEmpty == true) {
+        //     debugPrint('\tData: $data');
+        //   }
+        // }
       } else {
         debugPrint('${err.response!.data}');
       }
@@ -87,6 +94,7 @@ class LoggingInterceptor extends Interceptor {
       debugPrint('\tException: FetchDataException');
       debugPrint('\tMessage: $message');
     } else {
+      debugPrint('\tException: ${err.error}');
       debugPrint('\tUnknown Error');
     }
 

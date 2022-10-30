@@ -14,79 +14,79 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import '../../../domain/entities/movieEntity.dart';
+import 'features/dashboard/domain/entities/movieEntity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 4259014786850967197),
+      id: const IdUid(1, 1428568428883352625),
       name: 'Movie',
-      lastPropertyId: const IdUid(13, 7138858998165333366),
+      lastPropertyId: const IdUid(13, 6007205346081327126),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 1142087660790885982),
+            id: const IdUid(1, 8206749704616936929),
             name: 'adult',
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(2, 6539279125789893241),
+            id: const IdUid(2, 3278159844911766652),
             name: 'backdrop_path',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 4454079212538115618),
+            id: const IdUid(3, 8887109836892776671),
             name: 'id',
             type: 6,
             flags: 129),
         ModelProperty(
-            id: const IdUid(4, 4485335037068040266),
+            id: const IdUid(4, 3946846511905031673),
             name: 'original_language',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 3072455222173695700),
+            id: const IdUid(5, 2084253577028075547),
             name: 'original_title',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 4533798736500167528),
+            id: const IdUid(6, 8876352318629717148),
             name: 'overview',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(7, 1693879341385465174),
+            id: const IdUid(7, 1659734574679950718),
             name: 'popularity',
             type: 8,
             flags: 0),
         ModelProperty(
-            id: const IdUid(8, 7930747318649948829),
+            id: const IdUid(8, 5900485947777457861),
             name: 'poster_path',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(9, 8480133071945222711),
+            id: const IdUid(9, 7750960639779980213),
             name: 'release_date',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(10, 1976330611213429275),
+            id: const IdUid(10, 7238195721355345418),
             name: 'title',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(11, 7441868489124705447),
+            id: const IdUid(11, 2741243816756670013),
             name: 'video',
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(12, 5514241320195759101),
+            id: const IdUid(12, 6544897314121756125),
             name: 'vote_average',
             type: 8,
             flags: 0),
         ModelProperty(
-            id: const IdUid(13, 7138858998165333366),
+            id: const IdUid(13, 6007205346081327126),
             name: 'vote_count',
             type: 6,
             flags: 0)
@@ -115,7 +115,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 4259014786850967197),
+      lastEntityId: const IdUid(1, 1428568428883352625),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),

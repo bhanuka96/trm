@@ -23,7 +23,7 @@ class DioService {
     Options? options,
     CancelToken? cancelToken,
   }) async {
-    final response = await _dio.get<Map<String,dynamic>>(
+    final response = await _dio.get<Map<String,dynamic>?>(
       endpoint,
       queryParameters: queryParams,
       cancelToken: cancelToken ?? _cancelToken,

@@ -6,7 +6,7 @@ import '../common/providers.dart';
 import 'application/movieController.dart';
 import 'infrastructure/repositories/movieRepository.dart';
 
-final repositoryProvider = Provider(
+final movieRepositoryProvider = Provider(
   (ref) {
     final moviesRepository = ref.watch(moviesRepositoryProvider);
     return MovieController(movieRepository: moviesRepository);

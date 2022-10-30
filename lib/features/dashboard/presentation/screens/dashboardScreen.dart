@@ -30,10 +30,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
-     ref.read(repositoryProvider).init(ref, pageKey);
+     ref.read(movieRepositoryProvider).init(ref, pageKey);
     });
 
-    _subscriptionOld = ref.read(repositoryProvider).getStream().listen((state) {
+    _subscriptionOld = ref.read(movieRepositoryProvider).getStream().listen((state) {
       _pagingController.value = PagingState(
         error: state.error,
         nextPageKey: state.nextPageKey,
@@ -92,7 +92,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     _subscription.cancel();
     _subscriptionOld.cancel();
     _pagingController.dispose();
-    ref.read(repositoryProvider).dispose();
+    ref.read(movieRepositoryProvider).dispose();
     super.dispose();
   }
 }

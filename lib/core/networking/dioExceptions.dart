@@ -2,6 +2,12 @@ import 'package:dio/dio.dart';
 
 /// An enum that holds names for our custom exceptions.
 enum ExceptionType {
+  /// Invalid Argument
+  invalidArgumentException,
+
+  /// Invalid Token
+  invalidTokenException,
+
   /// The exception for an expired bearer token.
   tokenExpiredException,
 
@@ -88,26 +94,28 @@ class DioExceptions implements Exception {
                 message: 'No internet connectivity',
               );
             }
-            if (error.response?.data['headers']['code'] == null) {
+            final statusCode = error.response?.data?['status_code'] as int?;
+            final statusMessage = error.response?.data?['status_message'] as String?;
+            final isSuccess = error.response?.data?['success'] as bool?;
+            final errors = error.response?.data?['errors'] as List?;
+
+            if (errors?.isNotEmpty == true && isSuccess == false) {
               return DioExceptions(
                 exceptionType: ExceptionType.unrecognizedException,
                 statusCode: error.response?.statusCode,
-                message: error.response?.statusMessage ?? 'Unknown',
+                message: errors?[0] ?? 'Unknown',
               );
             }
-            final name = error.response?.data['headers']['code'] as String;
-            final message = error.response?.data['headers']['message'] as String;
-            if (name == ExceptionType.tokenExpiredException.name) {
+
+            if (statusCode == 7 && isSuccess == false) {
               return DioExceptions(
-                exceptionType: ExceptionType.tokenExpiredException,
-                code: name,
+                exceptionType: ExceptionType.invalidTokenException,
                 statusCode: error.response?.statusCode,
-                message: message,
+                message: statusMessage ?? 'Unknown',
               );
             }
             return DioExceptions(
-              message: message,
-              code: name,
+              message: 'Unknown',
               statusCode: error.response?.statusCode,
             );
         }
