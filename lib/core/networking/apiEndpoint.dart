@@ -10,7 +10,7 @@ class ApiEndpoint {
 
   /// Returns the path for an authentication [endpoint].
   static String movie(MovieEndpoint endpoint) {
-    const path = '/movie';
+    const path = '/3/movie';
     switch (endpoint) {
       case MovieEndpoint.topRated: return '$path/top_rated';
     }

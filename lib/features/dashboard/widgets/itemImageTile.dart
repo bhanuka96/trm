@@ -15,17 +15,6 @@ class ItemImageWidget extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        // Container(
-        //   width: 130,
-        //   height: 160,
-        //   decoration: BoxDecoration(
-        //     image: DecorationImage(
-        //       image: NetworkImage('https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}'),
-        //       fit: BoxFit.cover,
-        //     ),
-        //     borderRadius: BorderRadius.circular(12),
-        //   ),
-        // ),
         CachedNetworkImage(
           imageUrl: 'https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}',
           width: 130,
