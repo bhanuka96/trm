@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:trm/config/appStrings.dart';
 
 import '../../../config/appColors.dart';
 import '../../common/application/connectionController.dart';
@@ -17,7 +18,7 @@ class NoInternet extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AppText(text: 'No Internet connection', fontSize: 20, fontWeight: FontWeight.w500),
+        AppText(text: AppStrings.noConnection, fontSize: 20, fontWeight: FontWeight.w500),
         const SizedBox(height: 20),
         AppText(text: 'Check your connection, the refresh the page', color: AppColors.silver),
         const SizedBox(height: 20),

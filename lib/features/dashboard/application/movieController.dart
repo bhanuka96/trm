@@ -8,6 +8,7 @@ import 'package:trm/features/common/application/connectionController.dart';
 import 'package:trm/features/common/providers.dart';
 import 'package:trm/main.dart';
 
+import '../../../config/appStrings.dart';
 import '../domain/entities/movieEntity.dart';
 import '../domain/entities/paginationState.dart';
 import '../infrastructure/repositories/movieRepository.dart';
@@ -67,18 +68,15 @@ class MovieController {
       late List<Movie?>? results;
 
       if (pageKey == (cacheMovies.length ~/ 20)) {
-        final totalPages = cacheMovies.length ~/ 20;
+        // final totalPages = cacheMovies.length ~/ 20;
         // isLastPage = pageKey == totalPages;
         results = cacheMovies;
-        debugPrint('isStillCache : PageKey=$pageKey, IsLast=$isLastPage , TotalPage=$totalPages , ResultLength=${results.length}');
       } else if (ref.read(connectionDetectOneTimeProvider).value == NetworkStatus.off) {
-        debugPrint('Connection : ${ref.read(connectionDetectOneTimeProvider).value}');
-        throw ('No Internet Connection');
+        throw (AppStrings.noConnection);
       } else {
         final response = await _get(pageKey);
         isLastPage = pageKey == response?.total_pages;
         results = response?.results;
-        debugPrint('isStillCache Not : PageKey=$pageKey, IsLast=$isLastPage , ResultLength=${results?.length}');
       }
 
       final nextPageKey = isLastPage ? 0 : pageKey + 1;

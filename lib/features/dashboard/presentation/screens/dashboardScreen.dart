@@ -30,7 +30,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
-      ref.read(repositoryProvider).init(ref, pageKey);
+     ref.read(repositoryProvider).init(ref, pageKey);
     });
 
     // _subscription = objectBox.getMoviesStream().listen((event) {
